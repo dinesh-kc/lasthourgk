@@ -1,519 +1,63 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MCQ Application</title>
+  <title>Quiz Application</title>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
-    h1 {
-      color: #007bff;
-    }
-
-    /* Sidebar Styles */
-    .sidebar {
-      width: 250px;
-      height: 100vh;
-      background-color: #343a40;
+      background: linear-gradient(to bottom right, #007bff, #6a11cb);
       color: white;
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding: 20px 10px;
+      margin: 0;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-    .sidebar h2 {
-      color: #007bff;
-      margin-bottom: 20px;
+      align-items: center;
       text-align: center;
     }
-    .sidebar a {
-      text-decoration: none;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      display: block;
-      transition: background-color 0.3s;
-    }
-    .sidebar a:hover {
-      background-color: #495057;
-    }
-
-    /* Mobile Sidebar */
-    .menu-btn {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 1100;
-      display: none;
-    }
-    .menu-btn:hover {
-      background-color: #0056b3;
-    }
-
-    /* Show Menu Button on Mobile */
-    @media (max-width: 768px) {
-      .menu-btn {
-        display: block;
-      }
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-      .sidebar.visible {
-        transform: translateX(0);
-      }
-    }
-
-    /* Content Area */
-    .content {
-      margin-left: 250px;
-      padding: 20px;
-      width: calc(100% - 250px);
-    }
-    @media (max-width: 768px) {
-      .content {
-        margin-left: 0;
-        width: 100%;
-      }
-    }
-
-    /* Quiz and Bookmark Styles */
-    .quiz-container {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      width: 100%;
-      padding: 20px;
+    h1 {
+      font-size: 2.5rem;
       margin-bottom: 20px;
     }
-    .question {
-      margin-bottom: 20px;
-    }
-    .question-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .options {
-      list-style-type: none;
-      padding: 0;
-    }
-    .options li {
-      margin-bottom: 10px;
-    }
-    .correct {
-      color: green;
-      font-weight: bold;
-    }
-    .incorrect {
-      color: red;
-      font-weight: bold;
-    }
-    .bookmarked {
-      color: blue;
-      font-weight: bold;
-    }
-    .btn {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-      transition: background-color 0.3s;
-    }
-    .btn:hover {
-      background-color: #0056b3;
-    }
-    #result, #bookmarks {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
+    .quiz-list {
       width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
       padding: 20px;
-      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
-    .remove-btn {
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
+    .quiz-item {
+      background: white;
+      color: #333;
       border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .remove-btn:hover {
-      background-color: darkred;
+    .quiz-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .quiz-item {
+        font-size: 1rem;
+        padding: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Mobile Menu Button -->
-  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
-
-  <!-- Sidebar Navigation -->
-  <div class="sidebar" id="sidebar">
-    <h2>Navigation</h2>
-    <a href="index.html">Home</a>
-    <a href="quiz.html">Quiz</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="#bookmarked-questions" onclick="showBookmarks()">Bookmarks</a>
+  <h1>Quiz Application</h1>
+  <div class="quiz-list">
+    <div class="quiz-item" onclick="location.href='quiz1.html'">Quiz 1: General Knowledge</div>
+    <div class="quiz-item" onclick="alert('Quiz 2 coming soon!')">Quiz 2: Coming Soon</div>
+    <!-- Add more quizzes as needed -->
   </div>
-
-  <!-- Main Content -->
-  <div class="content">
-    <h1>MCQ Application</h1>
-    <div class="quiz-container" id="quiz"></div>
-    <div>
-      <button class="btn" onclick="checkAnswers()">Submit</button>
-    </div>
-    <div id="result"></div>
-    <div id="bookmarks">
-      <h2>Bookmarked Questions</h2>
-    </div>
-  </div>
-
-  <script>
-    const quizData = {
-        "questions": [
-    {
-      "number": 1,
-      "date": "2081-10-01",
-      "question": "पर्यावरण विज्ञान (Ecology) का प्रथम प्रयोगकर्ता को हुन्?",
-      "options": {
-        "A": "कालि एरली",
-        "B": "ए जी ट्रान्स्ली",
-        "C": "बार्बरा वाईड",
-        "D": "अर्नस्ट ह्याकेले"
-      },
-      "correct_answer": "D",
-      "description": {
-        "A": "दिगो विकास",
-        "B": "बार्बरा वाईड",
-        "C": "पारिस्थितिक पद्धति",
-        "D": "अर्नस्ट ह्याकेले"
-      }
-    },
-    {
-      "number": 2,
-      "date": "2081-10-01",
-      "question": "सातौं कृषि गणना, २०७८ अनुसार सबैभन्दा धेरै गहुँ खेती हुने नेपाली जिल्ला कुन हो?",
-      "options": {
-        "A": "रुपन्देही",
-        "B": "भापा",
-        "C": "मोरङ",
-        "D": "चितवन"
-      },
-      "correct_answer": "A",
-      "description": {
-        "A": "धान खेती सबै भन्दा बढी गरिने प्रदेश मधेश र जिल्ला मोरङ रहेको छ। गहुँ खेती सबै भन्दा बढी गरिने प्रदेश मधेश र जिल्ला रुपन्देही रहेको छ। मकै खेती सबै भन्दा बढी गरिने प्रदेश गण्डकी र जिल्ला भापा रहेको छ। तरकारी खेती सबैभन्दा बढी गरिने प्रदेश बागमती र जिल्ला चितवन रहेको छ।"
-      }
-    },
-    {
-      "number": 3,
-      "date": "2081-10-01",
-      "question": "बैदाम तालको उपनामले कुन ताललाई चिनिन्छ?",
-      "options": {
-        "A": "मैदी ताल",
-        "B": "फेवा ताल",
-        "C": "घोडाघोडी ताल",
-        "D": "फिल्लिमिला ताल"
-      },
-      "correct_answer": "B",
-      "description": {
-        "A": "मैदी ताल",
-        "B": "डुङ्गा हान्ने ताल",
-        "C": "बेदम ताल",
-        "D": "फेवा ताल"
-      }
-    },
-    {
-      "number": 4,
-      "date": "2081-10-01",
-      "question": "सबैभन्दा धेरै पिछडिएको स्थानीय तहमा सुचिकृत स्थानीय तहहरू कुन जिल्लामा अवस्थित रहेका छन् ?",
-      "options": {
-        "A": "बझाङ",
-        "B": "बैतडी",
-        "C": "अछाम",
-        "D": "डोटी"
-      },
-      "correct_answer": "C",
-      "description": ""
-    },
-    {
-      "number": 5,
-      "date": "2081-10-01",
-      "question": "भौगोलिक आधारमा पहाडी प्रदेशमा उपमहानगरपालिक कति रहेका छन् ?",
-      "options": {
-        "A": "८ वटा",
-        "B": "२ वटा",
-        "C": "३ वटा",
-        "D": "१ वटा"
-      },
-      "correct_answer": "B",
-      "description": ""
-    },
-    {
-      "number": 6,
-      "date": "2081-10-01",
-      "question": "मधेसको लिम्बु उपनामले कुन जातिलाई चिनिन्छ ?",
-      "options": {
-        "A": "चेपाङ",
-        "B": "किसान",
-        "C": "हिमाल",
-        "D": "शेर्पा"
-      },
-      "correct_answer": "D",
-      "description": ""
-    },
-    {
-      "number": 7,
-      "date": "2081-10-01",
-      "question": "विश्वका सबैभन्दा ठूलो धर्म इसाई धर्मको धर्मावलम्बी नेपालमा कति रहेका छन् ?",
-      "options": {
-        "A": "०.४५ प्रतिशत",
-        "B": "०.५ प्रतिशत",
-        "C": "१.७५ प्रतिशत",
-        "D": "२.५ प्रतिशत"
-      },
-      "correct_answer": "A",
-      "description": ""
-    },
-    {
-      "number": 8,
-      "date": "2081-10-01",
-      "question": "नेपालको कतिवटा प्रदेशले भारत र चीन दुबै मुलुकलाई छुन्छन् ?",
-      "options": {
-        "A": "३ वटा",
-        "B": "४ वटा",
-        "C": "५ वटा",
-        "D": "६ वटा"
-      },
-      "correct_answer": "B",
-      "description": ""
-    },
-    {
-      "number": 9,
-      "date": "2081-10-01",
-      "question": "भारत छोडो आन्दोलन कहिले सुरु भएको थियो ?",
-      "options": {
-        "A": "सन् १९३९",
-        "B": "सन् १९२०",
-        "C": "सन् १९४७",
-        "D": "सन् १९४२"
-      },
-      "correct_answer": "D",
-      "description": ""
-    },
-    {
-      "number": 10,
-      "date": "2081-10-01",
-      "question": "नेपालको संविधानको पालना गर्नु प्रत्येक ....... को कर्तव्य हो।",
-      "options": {
-        "A": "व्यक्ति",
-        "B": "नागरिक",
-        "C": "जनता",
-        "D": "सर्वसाधारण"
-      },
-      "correct_answer": "A",
-      "description": ""
-    },
-    {
-      "number": 11,
-      "date": "2081-10-01",
-      "question": "नेपाल संयुक्त राष्ट्र संघको सदस्य हुँदा तत्कालीन UNO महासचिव को थिए?",
-      "options": {
-        "A": "ट्र्युमन ली",
-        "B": "इयान ह्यामर्सोल्ड",
-        "C": "कोफी अन्नान",
-        "D": "बान कि मुन"
-      },
-      "correct_answer": "B",
-      "description": ""
-    },
-    {
-      "number": 12,
-      "date": "2081-10-01",
-      "question": "नेपालमा सार्क सचिवालय राख्न प्रस्ताव गर्ने मुख्य कुन हो?",
-      "options": {
-        "A": "पाकिस्तान",
-        "B": "भारत",
-        "C": "बंगलादेश",
-        "D": "श्रीलंका"
-      },
-      "correct_answer": "A",
-      "description": ""
-    },
-    {
-      "number": 13,
-      "date": "2081-10-01",
-      "question": "विश्व पानी दिवस कुन तारिखमा मनाइन्छ?",
-      "options": {
-        "A": "मार्च २२",
-        "B": "मे २२",
-        "C": "डिसेम्बर ५",
-        "D": "जुन ५"
-      },
-      "correct_answer": "A",
-      "description": ""
-    },
-    {
-      "number": 14,
-      "date": "2081-10-01",
-      "question": "रोग देखिने डरलाई वैज्ञानिक भाषामा के भनिन्छ?",
-      "options": {
-        "A": "Philophobia",
-        "B": "Pyrophobia",
-        "C": "Pathophobia",
-        "D": "Ombrophobia"
-      },
-      "correct_answer": "C",
-      "description": ""
-    },
-    {
-      "number": 15,
-      "date": "2081-10-01",
-      "question": "सोहौँ योजनाको अन्त्य सम्म नेपालको मानव विकास सूचकाङ्क कति पुर्याउने लक्ष्य रहेको छ?",
-      "options": {
-        "A": "सूचकाङ्क ०.६५०",
-        "B": "सूचकाङ्क ०.६६०",
-        "C": "सूचकाङ्क ०.७५०",
-        "D": "सूचकाङ्क ०.७६०"
-      },
-      "correct_answer": "A",
-      "description": ""
-    }
-  ]
-    
-    };
-
-    let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
-
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('visible');
-    }
-
-    function loadQuiz() {
-      const quizContainer = document.getElementById("quiz");
-      quizData.questions.forEach((question, index) => {
-        const questionElement = document.createElement("div");
-        questionElement.className = "question";
-        questionElement.innerHTML = `
-          <div class="question-title">${index + 1}. ${question.question}</div>
-          <ul class="options">
-            ${Object.keys(question.options).map(option =>
-          `<li><label><input type="radio" name="question${index}" value="${option}"> ${option}. ${question.options[option]}</label></li>`).join('')}
-          </ul>
-          <button class="btn" onclick="bookmarkQuestion(${index})">Bookmark</button>
-        `;
-        quizContainer.appendChild(questionElement);
-      });
-      loadBookmarks();
-    }
-
-    function bookmarkQuestion(index) {
-      if (!bookmarks.includes(index)) {
-        bookmarks.push(index);
-        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-        loadBookmarks();
-        alert("Question bookmarked!");
-      }
-    }
-
-    function loadBookmarks() {
-      const bookmarksContainer = document.getElementById("bookmarks");
-      bookmarksContainer.innerHTML = '<h2>Bookmarked Questions</h2>' + bookmarks.map(index => {
-        const question = quizData.questions[index];
-        if (!question) return '';  // Safety check to avoid undefined reference
-        return `
-          <div class="bookmarked">
-            <b>Question ${index + 1}:</b> ${question.question}<br>
-            ${Object.keys(question.options).map(option =>
-          `<div>${option}. ${question.options[option]}</div>`).join('')}
-            <button class="remove-btn" onclick="removeBookmark(${index})">Remove Bookmark</button>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function removeBookmark(index) {
-      bookmarks = bookmarks.filter(i => i !== index);
-      localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-      loadBookmarks();
-    }
-
-    function showBookmarks() {
-      document.getElementById("bookmarks").scrollIntoView({ behavior: "smooth" });
-    }
-
-    function checkAnswers() {
-      let score = 0;
-      const results = [];
-
-      quizData.questions.forEach((question, index) => {
-        const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
-        const correctOption = question.correct_answer;
-        
-        const optionsElements = document.getElementsByName(`question${index}`);
-        optionsElements.forEach(optionElement => {
-          const optionLabel = optionElement.parentElement;
-          if (optionElement.value === correctOption) {
-            optionLabel.classList.add('correct');
-          } else {
-            optionLabel.classList.remove('correct');
-          }
-          if (selectedOption && selectedOption.value === optionElement.value && optionElement.value !== correctOption) {
-            optionLabel.classList.add('incorrect');
-          } else {
-            optionLabel.classList.remove('incorrect');
-          }
-        });
-
-        const result = {
-          question: question.question,
-          correctAnswer: question.options[correctOption],
-          userAnswer: selectedOption ? question.options[selectedOption.value] : 'No Answer'
-        };
-
-        results.push(result);
-
-        if (selectedOption && selectedOption.value === correctOption) {
-          score++;
-        }
-      });
-
-      document.getElementById("result").innerHTML = `Your score: ${score} / ${quizData.questions.length}<br>${results.map(result => `
-        <div>
-          <b>Question:</b> ${result.question}<br>
-          <b>Correct Answer:</b> ${result.correctAnswer}<br>
-          <b>Your Answer:</b> ${result.userAnswer}<br>
-        </div>
-      `).join('')}`;
-    }
-
-    window.onload = loadQuiz;
-  </script>
 </body>
 </html>
