@@ -26,7 +26,7 @@ body {
   }
   
   button {
-    margin-top: 10px;
+    margin-top: 5px;
   }
   
   .result-section {
@@ -83,7 +83,7 @@ body {
   }
   
   button {
-    margin-top: 10px;
+    margin-top: 5px;
   }
   
   button:disabled {

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCQ Exam Application</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-app="mcqApp" ng-controller="mcqController">
+  
+  <div class="container mt-4">
+    <!-- Questions Section -->
+    <h2>MCQ Exam</h2>
+    <form>
+        <div ng-repeat="question in questions" style="margin-bottom: -10px;">
+            <div class="question-card">
+              <h5>{{question.number}}. {{question.question}}</h5>
+              
+              <!-- Display Statements -->
+              <div ng-repeat="(key, statement) in question.statements">
+                <p>{{key}}: {{statement}}</p>
+              </div>
+              
+              <!-- Display Options -->
+              <div class="form-check" ng-repeat="(option, value) in question.options">
+                <input class="form-check-input" type="radio" ng-model="question.userAnswer" ng-value="option" id="option{{question.number}}-{{option}}">
+                <label class="form-check-label" for="option{{question.number}}-{{option}}">{{value}}</label>
+              </div>
+          
+              <!-- Bookmarking option -->
+              <button ng-if="!isBookmarked(question)" ng-click="bookmarkQuestion(question)" class="btn btn-sm btn-bookmark mt-2">Bookmark</button>
+              <button ng-if="isBookmarked(question)" class="btn btn-sm btn-secondary mt-2" disabled>Bookmarked</button>
+            </div>
+          </div>
+          
+
+      <!-- Submit Button -->
+      <button ng-click="submitExam()" class="btn btn-success mt-3">Submit Exam</button>
+      <button ng-click="resetExam()" class="btn btn-warning mt-3 ml-2">Reset</button>
+    </form>
+
+    <!-- Result Section -->
+    <div ng-if="result" class="result-section">
+        <div class="result-header">
+          <h3>Results</h3>
+          <p><strong>Total Correct:</strong> {{result.totalCorrect}} / {{result.totalQuestions}}</p>
+        </div>
+      
+        <div class="result-summary">
+          <h4>Summary:</h4>
+          <p><strong>Correct Answers: </strong>{{result.totalCorrect}}/{{result.totalQuestions}}</p>
+          <p><strong>Score: </strong>{{(result.totalCorrect / result.totalQuestions) * 100}}%</p>
+        </div>
+      
+        <div class="result-details">
+          <h4>Detailed Answers:</h4>
+          <div ng-repeat="answer in result.answers">
+            <div class="result-question">
+              <p>{{answer.question.number}}. {{answer.question.question}}</p>
+              
+              <!-- Display Statements -->
+              <div ng-repeat="(key, statement) in answer.question.statements">
+                <p><strong>{{key}}: </strong>{{statement}}</p>
+              </div>
+      
+              <div class="result-answer">
+                <strong>Your Answer:</strong> {{answer.userAnswer}} 
+                <span ng-class="{'text-success': answer.isCorrect, 'text-danger': !answer.isCorrect}">
+                  ({{answer.isCorrect ? 'Correct' : 'Incorrect'}})
+                </span>
+              </div>
+              
+              <div class="correct-answer">
+                <strong>Correct Answer:</strong> {{answer.correctAnswer}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    <!-- <div ng-if="result" class="result-section">
+      <div class="result-header">
+        <h3>Results</h3>
+        <p><strong>Total Correct:</strong> {{result.totalCorrect}} / {{result.totalQuestions}}</p>
+      </div>
+
+      <div class="result-summary">
+        <h4>Summary:</h4>
+        <p><strong>Correct Answers: </strong>{{result.totalCorrect}}/{{result.totalQuestions}}</p>
+        <p><strong>Score: </strong>{{(result.totalCorrect / result.totalQuestions) * 100}}%</p>
+      </div>
+
+      <div class="result-details">
+        <h4>Detailed Answers:</h4>
+        <div ng-repeat="answer in result.answers">
+          <div class="result-question">
+            <p>{{answer.question.number}}. {{answer.question.question}}</p>
+            <div class="result-answer">
+              <strong>Your Answer:</strong> {{answer.userAnswer}} 
+              <span ng-class="{'text-success': answer.isCorrect, 'text-danger': !answer.isCorrect}">
+                ({{answer.isCorrect ? 'Correct' : 'Incorrect'}})
+              </span>
+            </div>
+            <div class="correct-answer">
+              <strong>Correct Answer:</strong> {{answer.correctAnswer}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="aarthik.js"></script>
+</body>
+</html>
