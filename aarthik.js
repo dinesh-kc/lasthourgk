@@ -378,11 +378,10 @@ angular.module('mcqApp', [])
     
       // Evaluate each question
       $scope.questions.forEach(function (question,index) {
-        // console.log(question);
-        // console.log(question.options['question.answer']);
-        const isCorrect = question.userAnswer === question.answer; // Compare user's answer with the correct one
+     
+        const isCorrect = (question.userAnswer || "").toLowerCase() === (question.answer|| "").toLowerCase(); // Compare user's answer with the correct one
         
-
+        // console.log(isCorrect);
         // const userAnswerText = question.options[question.userAnswer] || "No Answer";
         // const correctAnswerText = question.options[question.answer];
   
@@ -410,6 +409,7 @@ angular.module('mcqApp', [])
         });
     // console.log($scope.result.answers)
         if (isCorrect) {
+          
           totalCorrect++;
         }
       });
