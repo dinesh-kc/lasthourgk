@@ -13,7 +13,7 @@ angular.module('mcqApp', [])
           "c": "सुर्खेत",
           "d": "दार्चुला"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 3,
@@ -24,7 +24,7 @@ angular.module('mcqApp', [])
           "c": "२४.०९ प्रतिशत",
           "d": "२५.८ प्रतिशत"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 4,
@@ -35,7 +35,7 @@ angular.module('mcqApp', [])
           "c": "वैदेशिक सहायता",
           "d": "वैदेशिक अनुदान"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 5,
@@ -46,7 +46,7 @@ angular.module('mcqApp', [])
           "c": "१३९९ डलर",
           "d": "१४५६ डलर"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 6,
@@ -57,7 +57,7 @@ angular.module('mcqApp', [])
           "c": "संयुक्त अरब इमिरेट्स",
           "d": "काजकस्तान"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 7,
@@ -68,7 +68,7 @@ angular.module('mcqApp', [])
           "c": "३० प्रतिशत",
           "d": "५० प्रतिशत"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 8,
@@ -79,7 +79,7 @@ angular.module('mcqApp', [])
           "c": "उद्योग र पूर्वाधार, आर्थिक वृद्धिको प्रमुख आधार",
           "d": "सवल उद्योग र रोजगार, समृद्धि र सुखको आधार"
         },
-        "answer": "A"
+        "answer": "a"
       },
       {
         "number": 9,
@@ -90,7 +90,7 @@ angular.module('mcqApp', [])
           "c": "एस.डी.आर.",
           "d": "कर्कट पाता"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 10,
@@ -105,7 +105,7 @@ angular.module('mcqApp', [])
           "c": "दुवै ठीक",
           "d": "दुवै वेठीक"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 11,
@@ -116,7 +116,7 @@ angular.module('mcqApp', [])
           "c": "सप्तरी, सर्लाही, चितवन र रुपन्देही",
           "d": "महोत्तरी, सप्तरी, रौतहट र कपिलवस्तु"
         },
-        "answer": "A"
+        "answer": "a"
       },
       {
         "number": 12,
@@ -127,7 +127,7 @@ angular.module('mcqApp', [])
           "c": "पदमार्ग",
           "d": "हिमरेखा"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 13,
@@ -138,7 +138,7 @@ angular.module('mcqApp', [])
           "c": "अफगानिस्तान, पाकिस्तान, भारत, नेपाल, म्यानमार",
           "d": "नेपाल, भारत, चीन, भुटान, म्यानमार"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 14,
@@ -149,7 +149,7 @@ angular.module('mcqApp', [])
           "c": "भारत",
           "d": "नेपाल"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 15,
@@ -160,7 +160,7 @@ angular.module('mcqApp', [])
           "c": "भूपि शेरचन राजमार्ग",
           "d": "त्रिभुवन राजपथ"
         },
-        "answer": "B"
+        "answer": "b"
       },
       {
         "number": 16,
@@ -171,7 +171,7 @@ angular.module('mcqApp', [])
           "c": "2 मात्र ठीक",
           "d": "सवै बेठिक"
         },
-        "answer": "B"
+        "answer": "b"
       },
       {
         "number": 17,
@@ -182,7 +182,7 @@ angular.module('mcqApp', [])
           "c": "उद्योग",
           "d": "ऊर्जा"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 18,
@@ -193,7 +193,7 @@ angular.module('mcqApp', [])
           "c": "त्रिशुली",
           "d": "बुढीगण्डकी"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 19,
@@ -204,7 +204,7 @@ angular.module('mcqApp', [])
           "c": "सञ्चार क्षेत्र",
           "d": "कृषि उत्पादन"
         },
-        "answer": "A"
+        "answer": "a"
       },
       {
         "number": 20,
@@ -215,7 +215,7 @@ angular.module('mcqApp', [])
           "c": "२, ५, ६, ७",
           "d": "२, ३, ४, ५"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 21,
@@ -226,7 +226,7 @@ angular.module('mcqApp', [])
           "c": "रोजगारीको अवसर",
           "d": "दिगो विकास योजना"
         },
-        "answer": "A"
+        "answer": "a"
       },
       {
         "number": 22,
@@ -237,7 +237,7 @@ angular.module('mcqApp', [])
           "c": "मुक्तिनाथ",
           "d": "लुम्बिनी"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 23,
@@ -248,7 +248,7 @@ angular.module('mcqApp', [])
           "c": "गहुँ",
           "d": "तरकारी"
         },
-        "answer": "A"
+        "answer": "a"
       },
       {
         "number": 24,
@@ -259,7 +259,7 @@ angular.module('mcqApp', [])
           "c": "महिन्द्र",
           "d": "त्रिभुवन"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 25,
@@ -270,7 +270,7 @@ angular.module('mcqApp', [])
           "c": "कपास",
           "d": "सिस्नु"
         },
-        "answer": "B"
+        "answer": "b"
       },
       {
         "number": 26,
@@ -281,7 +281,7 @@ angular.module('mcqApp', [])
           "c": "सेवा",
           "d": "पर्यटन"
         },
-        "answer": "A"
+        "answer": "a"
       },
       {
         "number": 27,
@@ -292,7 +292,7 @@ angular.module('mcqApp', [])
           "c": "पर्यटन",
           "d": "कृषि"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 28,
@@ -303,7 +303,7 @@ angular.module('mcqApp', [])
           "c": "पर्यटन मन्त्रालय",
           "d": "अर्थ मन्त्रालय"
         },
-        "answer": "B"
+        "answer": "b"
       },
       {
         "number": 29,
@@ -314,7 +314,7 @@ angular.module('mcqApp', [])
           "c": "सेवा",
           "d": "पर्यटन"
         },
-        "answer": "C"
+        "answer": "c"
       },
       {
         "number": 30,
@@ -325,7 +325,7 @@ angular.module('mcqApp', [])
           "c": "३५%",
           "d": "५०%"
         },
-        "answer": "D"
+        "answer": "d"
       },
       {
         "number": 32,
@@ -947,7 +947,6 @@ angular.module('mcqApp', [])
       localStorage.setItem('bookmarkedQuestions', JSON.stringify($scope.bookmarkedQuestions));
     };
 
-    // Exam submission functionality
     $scope.submitExam = function () {
       let totalCorrect = 0;
       alert("Answer submitted");
@@ -956,43 +955,41 @@ angular.module('mcqApp', [])
       $scope.result = {
         totalQuestions: $scope.questions.length,
         totalCorrect: 0,
-        answers: [] // Ensure `answers` is initialized as an empty array
+        answers: []
       };
     
       // Evaluate each question
-      $scope.questions.forEach(function (question,index) {
-     
-        const isCorrect = (question.userAnswer || "").toLowerCase() === (question.answer|| "").toLowerCase(); // Compare user's answer with the correct one
-        
-        // console.log(isCorrect);
-        // const userAnswerText = question.options[question.userAnswer] || "No Answer";
-        // const correctAnswerText = question.options[question.answer];
-  
-
-  const userAnswerKey = (question.userAnswer || "").toLowerCase();
-  const correctAnswerKey = (question.answer || "").toLowerCase();
-
-  const userAnswerText = question.options[userAnswerKey] || "No Answer";
-  const correctAnswerText = question.options[correctAnswerKey] || "No Correct Answer";
-
-  // console.log("Question:", question.question);
-  // console.log("Options:", question.options);
-  // console.log("User Answer Key:", userAnswerKey);
-  // console.log("Correct Answer Key:", correctAnswerKey);
-  // console.log("User Answer Text:", userAnswerText);
-  // console.log("Correct Answer Text:", correctAnswerText);
-        
+      $scope.questions.forEach(function (question, index) {
+        const userAnswerKey = (question.userAnswer || "").toLowerCase();
+        const correctAnswerKey = question.answer || "";  // Preserve original case for correct answer
+    
+        const userAnswerText = question.options[userAnswerKey] || "No Answer";
+        const correctAnswerText = question.options[correctAnswerKey] || "No Correct Answer";
+    
+        const isCorrect = userAnswerKey === correctAnswerKey.toLowerCase();
+    
+        // Add specific debug log for question 30 and 32
+        if (question.number === 30 || question.number === 32) {
+          console.log("Debugging question " + question.number + ":");
+          console.log("Question:", question.question);
+          console.log("Options:", JSON.stringify(question.options));
+          console.log("User Answer Key:", userAnswerKey);
+          console.log("Correct Answer Key:", correctAnswerKey);
+          console.log("User Answer Text:", userAnswerText);
+          console.log("Correct Answer Text:", correctAnswerText);
+          console.log("Is Correct:", isCorrect);
+        }
+    
         // Push detailed result for each question
         $scope.result.answers.push({
           number: question.number,
-          question: question.question, // Store the question text
-          userAnswer: userAnswerText, // Actual answer selected by the user
-          correctAnswer: correctAnswerText, // Actual correct answer
-          isCorrect: isCorrect // True if the user's answer is correct
+          question: question.question,
+          userAnswer: userAnswerText,
+          correctAnswer: correctAnswerText,
+          isCorrect: isCorrect
         });
-    // console.log($scope.result.answers)
+    
         if (isCorrect) {
-          
           totalCorrect++;
         }
       });
