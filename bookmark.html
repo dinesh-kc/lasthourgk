@@ -122,7 +122,7 @@
       <!-- Loop through bookmarked questions and display -->
       <div ng-repeat="question in bookmarkedAarthikQuestions track by $index" class="bookmark-card">
         <div class="bookmark-card-header">
-          Question {{ $index + 1 }}: {{ question.question }}
+         {{ $index + 1 }}: {{ question.question }}
         </div>
         <div class="question-options">
      
@@ -147,19 +147,21 @@
 
 <hr/>
 <hr/>
-<hr/>
-    <!-- <h2 class="heading">Your Bookmarked Questions</h2> -->
 
-    <div id="bookmarkedQuestionsList">
-      <h3>General Bookmarked Questions</h3>
+
+    <div id="bookmarkedOrgQuestionsList">
+      <h3>संघसंस्था सम्बन्धि Bookmarked प्रश्नहरु:</h3>
       <!-- Bookmarked questions will be dynamically loaded here -->
-      <div ng-if="bookmarkedQuestions1.length === 0" class="alert alert-info text-center">
+      <div ng-if="bookmarkedOrgQuestions.length === 0" class="alert alert-info text-center">
         No questions bookmarked yet.
     
+      </div>
       <!-- Loop through bookmarked questions and display -->
-      <div ng-repeat="question in bookmarkedQuestions1 track by $index" class="bookmark-card">
+
+      <div ng-repeat="question in bookmarkedOrgQuestions track by $index" class="bookmark-card">
+        <!-- <h1> Question 1</h1> -->
         <div class="bookmark-card-header">
-          Question {{ $index + 1 }}: {{ question.question }}
+           {{ $index + 1 }}: {{ question.question }}
         </div>
         <div class="question-options">
           <p><strong>Options:</strong></p>
@@ -181,7 +183,7 @@
         </div>
       </div>
     </div>
-    </div>
+  
     <a href="index.html" class="back-btn">Back to Quiz</a>
   </div>
 
@@ -193,7 +195,8 @@
       // Load bookmarked questions from localStorage
       $scope.bookmarkedQuestions = JSON.parse(localStorage.getItem('bookmarkedQuestions')) || [];
       $scope.bookmarkedAarthikQuestions = JSON.parse(localStorage.getItem('bookmarkedAarthikQuestions')) || [];
-
+      $scope.bookmarkedOrgQuestions = JSON.parse(localStorage.getItem('bookmarkedOrgQuestions')) || [];
+      console.log($scope.bookmarkedOrgQuestions);
       // Function to delete a bookmarked question
       $scope.deleteBookmark = function (index) {
         // Remove the question from the array
