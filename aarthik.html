@@ -29,8 +29,21 @@
               </div>
           
               <!-- Bookmarking option -->
-              <button ng-if="!isBookmarked(question)" ng-click="bookmarkQuestion(question)" class="btn btn-sm btn-bookmark mt-2">Bookmark</button>
+              <button ng-if="!isBookmarked(question)" ng-click="bookmarkQuestion (question)" class="btn btn-sm btn-bookmark mt-2">Bookmark</button>
               <button ng-if="isBookmarked(question)" class="btn btn-sm btn-secondary mt-2" disabled>Bookmarked</button>
+
+              <!-- Show Answer button -->
+              <!-- <button ng-click="showAnswer(question)" class="btn btn-sm btn-info mt-2">Show Answer</button>
+              <div ng-if="question.showAnswer" class="answer-section mt-2">
+                <strong>Answer:</strong> {{question.correctAnswer}}
+              </div> -->
+
+              <!-- Within your question card div, after the bookmarking option -->
+<button ng-click="toggleAnswer(question)" class="btn btn-sm btn-info mt-2">Show Answer</button>
+<div ng-if="question.showAnswer" class="answer-section mt-2">
+  <strong>Answer:</strong> {{question.options[question.answer]}}
+</div>
+
             </div>
           </div>
           
@@ -81,36 +94,9 @@
         </div>
       </div>
       
-    <!-- <div ng-if="result" class="result-section">
-      <div class="result-header">
-        <h3>Results</h3>
-        <p><strong>Total Correct:</strong> {{result.totalCorrect}} / {{result.totalQuestions}}</p>
-      </div>
 
-      <div class="result-summary">
-        <h4>Summary:</h4>
-        <p><strong>Correct Answers: </strong>{{result.totalCorrect}}/{{result.totalQuestions}}</p>
-        <p><strong>Score: </strong>{{(result.totalCorrect / result.totalQuestions) * 100}}%</p>
-      </div>
 
-      <div class="result-details">
-        <h4>Detailed Answers:</h4>
-        <div ng-repeat="answer in result.answers">
-          <div class="result-question">
-            <p>{{answer.question.number}}. {{answer.question.question}}</p>
-            <div class="result-answer">
-              <strong>Your Answer:</strong> {{answer.userAnswer}} 
-              <span ng-class="{'text-success': answer.isCorrect, 'text-danger': !answer.isCorrect}">
-                ({{answer.isCorrect ? 'Correct' : 'Incorrect'}})
-              </span>
-            </div>
-            <div class="correct-answer">
-              <strong>Correct Answer:</strong> {{answer.correctAnswer}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+ 
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>

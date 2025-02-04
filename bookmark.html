@@ -111,17 +111,53 @@
 <body>
 
   <div class="container" ng-app="bookmarkApp" ng-controller="bookmarkCtrl">
-    <h2 class="heading">Your Bookmarked Questions</h2>
+   
 
-    <div id="bookmarkedQuestionsList">
+    <div id="bookmarkedAarthikQuestionsList">
+      <h3> आर्थिक खण्डमा BOOKMark गरिएका प्रश्नहरु</h3>
       <!-- Bookmarked questions will be dynamically loaded here -->
-
-      <div ng-if="bookmarkedQuestions.length === 0" class="alert alert-info text-center">
+      <div ng-if="bookmarkedAarthikQuestions.length === 0" class="alert alert-info text-center">
         No questions bookmarked yet.
       </div>
-
       <!-- Loop through bookmarked questions and display -->
-      <div ng-repeat="question in bookmarkedQuestions" class="bookmark-card">
+      <div ng-repeat="question in bookmarkedAarthikQuestions track by $index" class="bookmark-card">
+        <div class="bookmark-card-header">
+          Question {{ $index + 1 }}: {{ question.question }}
+        </div>
+        <div class="question-options">
+     
+          <ul>
+            <li><strong>A:</strong> {{ question.options.a }}</li>
+            <li><strong>B:</strong> {{ question.options.b }}</li>
+            <li><strong>C:</strong> {{ question.options.c }}</li>
+            <li><strong>D:</strong> {{ question.options.d }}</li>
+          </ul>
+        </div>
+        <p><strong>Correct Answer:</strong> {{ question.answer }}</p>
+        <button class="btn btn-sm btn-info mt-2" ng-click="deleteAarthikBookmark($index)" style="color: red;">
+          Delete<!-- Delete Bookmark <span class="delete-icon">🗑️</span> -->
+        </button>
+        <!-- Show Answer button -->
+        <button ng-click="toggleAnswer(question)" class="btn btn-sm btn-info mt-2">Show Answer</button>
+        <div ng-if="question.showAnswer" class="answer-section mt-2">
+          <strong>Answer:</strong> {{ question.options[question.answer] }}
+        </div>
+      </div>
+    </div>
+
+<hr/>
+<hr/>
+<hr/>
+    <!-- <h2 class="heading">Your Bookmarked Questions</h2> -->
+
+    <div id="bookmarkedQuestionsList">
+      <h3>General Bookmarked Questions</h3>
+      <!-- Bookmarked questions will be dynamically loaded here -->
+      <div ng-if="bookmarkedQuestions1.length === 0" class="alert alert-info text-center">
+        No questions bookmarked yet.
+    
+      <!-- Loop through bookmarked questions and display -->
+      <div ng-repeat="question in bookmarkedQuestions1 track by $index" class="bookmark-card">
         <div class="bookmark-card-header">
           Question {{ $index + 1 }}: {{ question.question }}
         </div>
@@ -134,13 +170,18 @@
             <li><strong>D:</strong> {{ question.options.D }}</li>
           </ul>
         </div>
-        <p><strong>Correct Answer:</strong> {{ question.correct_answer }}</p>
-        <button class="btn-delete" ng-click="deleteBookmark($index)">
-          Delete Bookmark <span class="delete-icon">🗑️</span>
+        <p><strong>Correct Answer:</strong> {{ question.answer }}</p>
+        <button class="btn btn-sm btn-info mt-2" ng-click="deleteAarthikBookmark($index)" style="color: red;">
+          Delete<!-- Delete Bookmark <span class="delete-icon">🗑️</span> -->
         </button>
+        <!-- Show Answer button -->
+        <button ng-click="toggleAnswer(question)" class="btn btn-sm btn-info mt-2">Show Answer</button>
+        <div ng-if="question.showAnswer" class="answer-section mt-2">
+          <strong>Answer:</strong> {{ question.options[question.answer] }}
+        </div>
       </div>
     </div>
-
+    </div>
     <a href="index.html" class="back-btn">Back to Quiz</a>
   </div>
 
@@ -151,6 +192,7 @@
     app.controller('bookmarkCtrl', function ($scope) {
       // Load bookmarked questions from localStorage
       $scope.bookmarkedQuestions = JSON.parse(localStorage.getItem('bookmarkedQuestions')) || [];
+      $scope.bookmarkedAarthikQuestions = JSON.parse(localStorage.getItem('bookmarkedAarthikQuestions')) || [];
 
       // Function to delete a bookmarked question
       $scope.deleteBookmark = function (index) {
@@ -158,6 +200,20 @@
         $scope.bookmarkedQuestions.splice(index, 1);
         // Save the updated list back to localStorage
         localStorage.setItem('bookmarkedQuestions', JSON.stringify($scope.bookmarkedQuestions));
+      };
+
+      // Function to delete a bookmarked question
+      $scope.deleteAarthikBookmark = function (index) {
+        alert("Are you Sure Want to Delete?");
+        // Remove the question from the array
+        $scope.bookmarkedAarthikQuestions.splice(index, 1);
+        // Save the updated list back to localStorage
+        localStorage.setItem('bookmarkedAarthikQuestions', JSON.stringify($scope.bookmarkedAarthikQuestions));
+      };
+
+      // Toggle answer function
+      $scope.toggleAnswer = function (question) {
+        question.showAnswer = !question.showAnswer;
       };
     });
   </script>

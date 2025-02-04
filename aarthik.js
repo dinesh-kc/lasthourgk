@@ -926,16 +926,16 @@ angular.module('mcqApp', [])
     $scope.questions.forEach(question => shuffleOptions(question));
 
     // Bookmark functionality
-    $scope.bookmarkedQuestions = JSON.parse(localStorage.getItem('bookmarkedQuestions')) || [];
+    $scope.bookmarkedAarthikQuestions = JSON.parse(localStorage.getItem('bookmarkedAarthikQuestions')) || [];
 
     $scope.isBookmarked = function(question) {
-      return $scope.bookmarkedQuestions.some(q => q.number === question.number);
+      return $scope.bookmarkedAarthikQuestions.some(q => q.number === question.number);
     };
 
-    $scope.bookmarkQuestion = function(question) {
+    $scope.bookmarkQuestion  = function(question) {
       if (!$scope.isBookmarked(question)) {
-        $scope.bookmarkedQuestions.push(question);
-        localStorage.setItem('bookmarkedQuestions', JSON.stringify($scope.bookmarkedQuestions));
+        $scope.bookmarkedAarthikQuestions.push(question);
+        localStorage.setItem('bookmarkedAarthikQuestions', JSON.stringify($scope.bookmarkedAarthikQuestions));
         alert("Question bookmarked!");
       } else {
         alert("This question is already bookmarked!");
@@ -943,8 +943,8 @@ angular.module('mcqApp', [])
     };
 
     $scope.removeBookmark = function(question) {
-      $scope.bookmarkedQuestions = $scope.bookmarkedQuestions.filter(q => q.number !== question.number);
-      localStorage.setItem('bookmarkedQuestions', JSON.stringify($scope.bookmarkedQuestions));
+      $scope.bookmarkedAarthikQuestions = $scope.bookmarkedAarthikQuestions.filter(q => q.number !== question.number);
+      localStorage.setItem('bookmarkedAarthikQuestions', JSON.stringify($scope.bookmarkedAarthikQuestions));
     };
 
     $scope.submitExam = function () {
@@ -1004,5 +1004,15 @@ angular.module('mcqApp', [])
     $scope.resetExam = function() {
       $scope.questions.forEach(question => question.userAnswer = null);
       $scope.result = null;
+    };
+
+      // Show answer function
+  $scope.showAnswer = function(question) {
+    question.showAnswer = true;
+  };
+
+    // Toggle answer function
+    $scope.toggleAnswer = function(question) {
+      question.showAnswer = !question.showAnswer;
     };
   });
