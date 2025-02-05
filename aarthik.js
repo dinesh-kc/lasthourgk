@@ -1,8 +1,7 @@
+
 angular.module('mcqApp', [])
 
-
-
-  mcqApp.controller('mcqController', function($scope) {
+  .controller('mcqController', function($scope) {
     // Replace the random question data with your provided JSON data
     $scope.questions = [
 
