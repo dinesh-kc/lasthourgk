@@ -15,12 +15,10 @@
             <h1>Comprehensive GK</h1>
         </div>
         <div class="nav-links">
-            <a href="aarthik.html" class="active">आर्थिक</a>
-            <a href="organization.html">संघसंस्था</a>
-            <a href="environment.html">वातावरण</a>
-            <a href="geography.html">भुगोल</a>
-            <a href="history.html">इतिहास</a>
-            <a href="bookmark.html">Tough Questions</a>
+            <a href="#" class="active">आर्थिक</a>
+            <a href="#">संघसंस्था</a>
+            <a href="#">समसामयिक</a>
+            <a href="#">Tough Questions</a>
         </div>
         <div class="auth-buttons">
             <button class="login-btn">Login</button>
@@ -62,6 +60,10 @@
             </div>
         </div>
 
+        <div class="text-center mt-4">
+            <h3>Check Your GK Knowledge:</h3>
+        </div>
+
         <!-- Category Cards -->
         <div class="quiz-categories">
             <div class="page-item page-item-1" onclick="window.location.href='aarthik.html'">
@@ -74,25 +76,19 @@
                 <div class="description">Organizations and institutions</div>
             </div>
 
-            <div class="page-item page-item-3" onclick="window.location.href='environment.html'">
-                <div class="title">वातावरण</div>
-                <div class="description">Environmental studies</div>
+            <div class="page-item page-item-2" onclick="window.location.href='contemporary.html'">
+                <div class="title">समसामयिक</div>
+                <div class="description">Current affairs and news</div>
             </div>
 
-            <div class="page-item page-item-4" onclick="window.location.href='geography.html'">
-                <div class="title">भुगोल</div>
-                <div class="description">Geography</div>
-            </div>
-
-            <div class="page-item page-item-5" onclick="window.location.href='history.html'">
-                <div class="title">इतिहास</div>
-                <div class="description">History</div>
-            </div>
-
-            <div class="page-item page-item-6" onclick="window.location.href='bookmark.html'">
+            <div class="page-item page-item-3" onclick="window.location.href='bookmark.html'">
                 <div class="title">View Your Tough Questions</div>
                 <div class="description">Review bookmarked questions</div>
             </div>
+        </div>
+
+        <div class="text-center">
+            <a href="index.html" class="btn btn-back">Back to Home</a>
         </div>
     </div>
 
@@ -107,25 +103,55 @@
                 <i class="fas fa-building"></i>
                 <span>संघसंस्था</span>
             </a>
-            <a href="environment.html">
-                <i class="fas fa-leaf"></i>
-                <span>वातावरण</span>
-            </a>
-            <a href="geography.html">
-                <i class="fas fa-globe"></i>
-                <span>भुगोल</span>
-            </a>
-            <a href="history.html">
-                <i class="fas fa-landmark"></i>
-                <span>इतिहास</span>
+            <a href="contemporary.html">
+                <i class="fas fa-newspaper"></i>
+                <span>समसामयिक</span>
             </a>
             <a href="bookmark.html">
                 <i class="fas fa-bookmark"></i>
                 <span>Tough Questions</span>
+            </a>
+            <a href="#">
+                <i class="fas fa-user"></i>
+                <span>Account</span>
             </a>
         </div>
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<script >
+
+    // Add this JavaScript to handle the custom dropdown
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        const items = dropdown.querySelectorAll('.dropdown-item');
+
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdowns.forEach(d => {
+                if (d !== dropdown) d.classList.remove('active');
+            });
+            dropdown.classList.toggle('active');
+        });
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                toggle.textContent = item.textContent;
+                dropdown.classList.remove('active');
+            });
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+        dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+    });
+}); 
+</script>
 </html>
