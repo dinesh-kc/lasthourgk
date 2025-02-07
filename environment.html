@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Exam Application - Environment</title>
+    
+    <!-- Add cache control meta tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Update version numbers in CSS links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="mcqstyle.css?v=1.2.0">
+</head>
+<body ng-app="mcqApp" ng-controller="mcqController">
+    
+    <div class="container mt-4">
+        <!-- Questions Section -->
+        <h2>MCQ Exam - Environment</h2>
+        <form>
+            <div ng-repeat="question in questions" style="margin-bottom: -10px;">
+                <div class="question-card">
+                    <h5>{{question.question_number}}. {{question.question}}</h5>
+                    
+                    <!-- Display Statements -->
+                    <div ng-repeat="(key, statement) in question.statements">
+                        <p>{{key}}: {{statement}}</p>
+                    </div>
+                    
+                    <!-- Display Options -->
+                    <div class="form-check" ng-repeat="(option, value) in question.options">
+                        <input class="form-check-input" type="radio" ng-model="question.userAnswer" ng-value="option" id="option{{question.number}}-{{option}}">
+                        <label class="form-check-label" for="option{{question.number}}-{{option}}">{{value}}</label>
+                    </div>
+                
+                    <!-- Bookmarking option -->
+                    <button ng-if="!isBookmarked(question)" ng-click="bookmarkQuestion(question)" class="btn btn-sm btn-bookmark mt-2">Bookmark</button>
+                    <button ng-if="isBookmarked(question)" class="btn btn-sm btn-secondary mt-2" disabled>Bookmarked</button>
+
+                    <!-- Show Answer button -->
+                    <button ng-click="toggleAnswer(question)" class="btn btn-sm btn-info mt-2">Show Answer</button>
+                    <div ng-if="question.showAnswer" class="answer-section mt-2">
+                        <strong>Answer:</strong> {{question.options[question.answer]}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button ng-click="submitExam()" class="btn btn-success mt-3" style="margin-top: -15px !important;">Submit Exam</button>
+            <button ng-click="resetExam()" class="btn btn-warning mt-3 ml-2" style="margin-top: -15px !important;">Reset</button>
+        </form>
+
+        <!-- Result Section -->
+        <div ng-if="result" class="result-section">
+            <div class="result-header">
+                <h3>Results</h3>
+                <p><strong>Total Correct:</strong> {{result.totalCorrect}} / {{result.totalQuestions}}</p>
+            </div>
+            
+            <div class="result-summary">
+                <h4>Summary:</h4>
+                <p><strong>Correct Answers: </strong>{{result.totalCorrect}}/{{result.totalQuestions}}</p>
+                <p><strong>Score: </strong>{{(result.totalCorrect / result.totalQuestions) * 100}}%</p>
+            </div>
+            
+            <div class="result-details">
+                <h4>Detailed Answers:</h4>
+                <div ng-repeat="answer in result.answers">
+                    <div class="result-question">
+                        <p>{{answer.number}}. {{answer.question}}</p>
+                        
+                        <!-- Display Statements -->
+                        <div ng-repeat="(key, statement) in answer.question.statements">
+                            <p><strong>{{key}}: </strong>{{statement}}</p>
+                        </div>
+                
+                        <div class="result-answer">
+                            <strong>Your Answer:</strong> {{answer.userAnswer}} 
+                            <span ng-class="{'text-success': answer.isCorrect, 'text-danger': !answer.isCorrect}">
+                                ({{answer.isCorrect ? 'Correct' : 'Incorrect'}})
+                            </span>
+                        </div>
+                        
+                        <div class="correct-answer">
+                            <strong>Correct Answer:</strong> {{answer.correctAnswer}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-links">
+            <a href="aarthik.html">
+                <i class="fas fa-coins"></i>
+                <span>आर्थिक</span>
+            </a>
+            <a href="organization.html">
+                <i class="fas fa-building"></i>
+                <span>संघसंस्था</span>
+            </a>
+            <a href="environment.html" class="active">
+                <i class="fas fa-leaf"></i>
+                <span>वातावरण</span>
+            </a>
+            <a href="geography.html">
+                <i class="fas fa-globe"></i>
+                <span>भुगोल</span>
+            </a>
+            <a href="history.html">
+                <i class="fas fa-landmark"></i>
+                <span>इतिहास</span>
+            </a>
+            <a href="bookmark.html">
+                <i class="fas fa-bookmark"></i>
+                <span>Tough Questions</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="environment.js?v=1.2.0"></script>
+
+    <!-- Add version check script -->
+    <script>
+        let versionChecked = false;
+        window.addEventListener('load', function() {
+            if (!versionChecked && performance.navigation.type === 1) {
+                versionChecked = true;
+                fetch('./version.json?nocache=' + new Date().getTime(), {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.version) {
+                        console.log('Version check successful');
+                        const currentVersion = localStorage.getItem('appVersion');
+                        if (currentVersion && currentVersion !== "1.2.0") {
+                            if (confirm('New version available! Would you like to update?')) {
+                                localStorage.setItem('appVersion', "1.2.0");
+                                window.location.reload();
+                            }
+                        } else {
+                            localStorage.setItem('appVersion', "1.2.0");
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.log('Version check failed:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

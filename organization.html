@@ -5,7 +5,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   
   <!-- Then add your script with defer -->
-  <script src="organization.js?v=1.0.0" defer></script>
+  <script src="organization.js?v=1.2.0" defer></script>
   
   <!-- Rest of your head content -->
   <meta charset="UTF-8">
@@ -20,7 +20,7 @@
      <meta http-equiv="Expires" content="0">
  
      <!-- Add version/timestamp to CSS and JS files -->
-     <link rel="stylesheet" href="mcqstyle.css?v=1.0.1">
+     <link rel="stylesheet" href="mcqstyle.css?v=1.2.0">
 </head>
 <body ng-app="mcqApp" ng-controller="mcqController">
   
@@ -49,10 +49,10 @@
               <button ng-if="isBookmarked(question)" class="btn btn-sm btn-secondary mt-2" disabled>Bookmarked</button>
 
        
-<button ng-click="toggleAnswer(question)" class="btn btn-sm btn-info mt-2">Show Answer</button>
-<div ng-if="question.showAnswer" class="answer-section mt-2">
-  <strong>Answer:</strong> {{question.options[question.answer]}}
-</div>
+  <button ng-click="toggleAnswer(question)" class="btn btn-sm btn-info mt-2">Show Answer</button>
+  <div ng-if="question.showAnswer" class="answer-section mt-2">
+    <strong>Answer:</strong> {{question.options[question.answer]}}
+  </div>
 
             </div>
           </div>
@@ -174,8 +174,7 @@
         });
     }
 
-    // Modified version check - only check once per session
-    let versionChecked = false;
+    // Modified version check
     window.addEventListener('load', function() {
         if (!versionChecked && performance.navigation.type === 1) {
             versionChecked = true;
@@ -195,15 +194,14 @@
             .then(data => {
                 if (data && data.version) {
                     console.log('Version check successful');
-                    // Store current version in localStorage
                     const currentVersion = localStorage.getItem('appVersion');
-                    if (currentVersion && currentVersion !== data.version) {
+                    if (currentVersion && currentVersion !== "1.2.0") {
                         if (confirm('New version available! Would you like to update?')) {
-                            localStorage.setItem('appVersion', data.version);
+                            localStorage.setItem('appVersion', "1.2.0");
                             window.location.reload();
                         }
                     } else {
-                        localStorage.setItem('appVersion', data.version);
+                        localStorage.setItem('appVersion', "1.2.0");
                     }
                 }
             })
