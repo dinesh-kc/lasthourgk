@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Add Angular first -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  
+  <!-- Then add your script with defer -->
+  <script src="organization.js?v=1.0.0" defer></script>
+  
+  <!-- Rest of your head content -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MCQ Exam Application</title>
   <!-- Order of CSS is important for proper styling -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="mcqstyle.css">
+     <!-- Add cache control meta tags -->
+     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+     <meta http-equiv="Pragma" content="no-cache">
+     <meta http-equiv="Expires" content="0">
+ 
+     <!-- Add version/timestamp to CSS and JS files -->
+     <link rel="stylesheet" href="mcqstyle.css?v=1.0.0">
 </head>
 <body ng-app="mcqApp" ng-controller="mcqController">
   
@@ -15,7 +28,7 @@
     <!-- Questions Section -->
     <h2>MCQ Exam</h2>
     <form>
-        <div ng-repeat="question in questions" style="margin-bottom: -10px;">
+        <div ng-repeat="question in questions track by $index" style="margin-bottom: -10px;">
             <div class="question-card">
               <h5>{{question.question_number}}. {{question.question}}</h5>
               
@@ -24,6 +37,7 @@
                 <p>{{key}}: {{statement}}</p>
               </div>
               
+              <h5>{{question.question_part_2}}</h5>
               <!-- Display Options -->
               <div class="form-check" ng-repeat="(option, value) in question.options">
                 <input class="form-check-input" type="radio" ng-model="question.userAnswer" ng-value="option" id="option{{question.number}}-{{option}}">
@@ -129,6 +143,61 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="organization.js"></script>
+
+
+
+  <script>
+    // Register service worker
+    if ('serviceWorker' in navigator && 
+        (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')  // Use relative path
+                .then(registration => {
+                    console.log('ServiceWorker registration successful');
+                    
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'activated') {
+                                window.location.reload();
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+        });
+    }
+
+    // Modified version check with error handling
+    window.addEventListener('load', function() {
+        if (performance.navigation.type === 1) {
+            fetch('./version.json?nocache=' + new Date().getTime(), {
+                method: 'GET',
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.version) {
+                    // Handle version check
+                    console.log('Version check successful');
+                }
+            })
+            .catch(error => {
+                console.log('Version check failed:', error);
+                // Continue with the application even if version check fails
+            });
+        }
+    });
+</script>
 </body>
 </html>
