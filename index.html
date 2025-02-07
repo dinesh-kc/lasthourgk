@@ -21,7 +21,7 @@
     <meta name="twitter:description" content="Free MCQ practice platform for आर्थिक, संघसंस्था, वातावरण, भुगोल, and इतिहास. Perfect for exam preparation with bookmarking feature.">
 
     <!-- Existing CSS links -->
-    <link rel="stylesheet" href="styles.css?v=1.0.0">
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -158,37 +158,68 @@
 
     <script>
         // Register service worker
-        if ('serviceWorker' in navigator) {
+        if ('serviceWorker' in navigator && 
+            (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then(registration => {
-                    console.log('ServiceWorker registration successful');
-                    
-                    // Check for updates
-                    registration.addEventListener('updatefound', () => {
-                        const newWorker = registration.installing;
-                        newWorker.addEventListener('statechange', () => {
-                            if (newWorker.state === 'activated') {
-                                // Reload the page when new version is activated
-                                window.location.reload();
-                            }
+                navigator.serviceWorker.register('./sw.js')  // Use relative path
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                        
+                        // Only check for updates when registration changes
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'activated') {
+                                    // Show update notification instead of auto-reload
+                                    if (confirm('New version available! Would you like to update?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
                         });
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed:', error);
                     });
-                }).catch(error => {
-                    console.log('ServiceWorker registration failed:', error);
-                });
             });
         }
     
-        // Add this to force reload if the page is loaded from cache
+        // Modified version check - only check once per session
+        let versionChecked = false;
         window.addEventListener('load', function() {
-            if (performance.navigation.type === 1) {
-                // This is a reload
-                fetch(window.location.href + '?nocache=' + new Date().getTime())
-                    .then(response => {
-                        if (response.ok) {
-                            window.location.reload(true);
+            if (!versionChecked && performance.navigation.type === 1) {
+                versionChecked = true;
+                fetch('./version.json?nocache=' + new Date().getTime(), {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.version) {
+                        console.log('Version check successful');
+                        // Store current version in localStorage
+                        const currentVersion = localStorage.getItem('appVersion');
+                        if (currentVersion && currentVersion !== data.version) {
+                            if (confirm('New version available! Would you like to update?')) {
+                                localStorage.setItem('appVersion', data.version);
+                                window.location.reload();
+                            }
+                        } else {
+                            localStorage.setItem('appVersion', data.version);
                         }
-                    });
+                    }
+                })
+                .catch(error => {
+                    console.log('Version check failed:', error);
+                });
             }
         });
     </script>
