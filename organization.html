@@ -155,11 +155,15 @@
                 .then(registration => {
                     console.log('ServiceWorker registration successful');
                     
+                    // Only check for updates when registration changes
                     registration.addEventListener('updatefound', () => {
                         const newWorker = registration.installing;
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'activated') {
-                                window.location.reload();
+                                // Show update notification instead of auto-reload
+                                if (confirm('New version available! Would you like to update?')) {
+                                    window.location.reload();
+                                }
                             }
                         });
                     });
@@ -170,9 +174,11 @@
         });
     }
 
-    // Modified version check with error handling
+    // Modified version check - only check once per session
+    let versionChecked = false;
     window.addEventListener('load', function() {
-        if (performance.navigation.type === 1) {
+        if (!versionChecked && performance.navigation.type === 1) {
+            versionChecked = true;
             fetch('./version.json?nocache=' + new Date().getTime(), {
                 method: 'GET',
                 headers: {
@@ -188,13 +194,21 @@
             })
             .then(data => {
                 if (data && data.version) {
-                    // Handle version check
                     console.log('Version check successful');
+                    // Store current version in localStorage
+                    const currentVersion = localStorage.getItem('appVersion');
+                    if (currentVersion && currentVersion !== data.version) {
+                        if (confirm('New version available! Would you like to update?')) {
+                            localStorage.setItem('appVersion', data.version);
+                            window.location.reload();
+                        }
+                    } else {
+                        localStorage.setItem('appVersion', data.version);
+                    }
                 }
             })
             .catch(error => {
                 console.log('Version check failed:', error);
-                // Continue with the application even if version check fails
             });
         }
     });
